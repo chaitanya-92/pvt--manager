@@ -2,6 +2,7 @@
 
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import com.android.build.gradle.tasks.PackageAndroidArtifact
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.agp.app)
@@ -15,6 +16,24 @@ plugins {
 val managerVersionCode: Int by rootProject.extra
 val managerVersionName: String by rootProject.extra
 
+// Load LordSu signing credentials from gitignored keystore.properties (project root).
+// Sets the Gradle properties that the apksign plugin reads below.
+run {
+    val keystorePropsFile = rootProject.file("keystore.properties")
+    if (keystorePropsFile.exists()) {
+        val props = Properties().apply {
+            keystorePropsFile.inputStream().use { load(it) }
+        }
+        // Resolve the keystore path to an absolute path so it works from any working dir.
+        props.getProperty("KEYSTORE_FILE")?.let {
+            project.extra.set("KEYSTORE_FILE", rootProject.file(it).absolutePath)
+        }
+        listOf("KEYSTORE_PASSWORD", "KEY_ALIAS", "KEY_PASSWORD").forEach { k ->
+            props.getProperty(k)?.let { project.extra.set(k, it) }
+        }
+    }
+}
+
 apksign {
     storeFileProperty = "KEYSTORE_FILE"
     storePasswordProperty = "KEYSTORE_PASSWORD"
@@ -23,7 +42,7 @@ apksign {
 }
 
 android {
-    namespace = "com.rifsxd.ksunext"
+    namespace = "com.lordsu.manager"
 
     buildTypes {
         release {
