@@ -10,7 +10,7 @@ Rebrand of KernelSU-Next into a private, exclusive root manager, LKM-mode (no cu
 | Package / applicationId | `com.lordsu.manager` |
 | Keystore | `manager/key.jks` (gitignored) |
 | Key alias | `lordsu` |
-| Store/key password | `lordsu2026` *(change for real use)* |
+| Store/key password | `<kept-private>` *(change for real use)* |
 | Key type | **RSA 2048** (required — see limit below) |
 
 ## Signing certificate values baked into the kernel
@@ -56,9 +56,9 @@ CI is already wired: `build-manager.yml` decodes a base64 `KEYSTORE` secret into
    repo to `main` (commands in chat).
 2. Add these **Actions secrets** (repo → Settings → Secrets and variables → Actions):
    - `KEYSTORE`          = base64 of `manager/key.jks`  → `base64 -i manager/key.jks | pbcopy`
-   - `KEYSTORE_PASSWORD` = `lordsu2026`
+   - `KEYSTORE_PASSWORD` = `<kept-private>`
    - `KEY_ALIAS`         = `lordsu`
-   - `KEY_PASSWORD`      = `lordsu2026`
+   - `KEY_PASSWORD`      = `<kept-private>`
 3. The push to `main` auto-runs **Build Manager** (or run it manually from the Actions
    tab). It produces two artifacts: **`manager`** (the signed LordSu APK) and the
    **LKM `kernelsu.ko`** for `android12-5.10` (your Moto G73).
