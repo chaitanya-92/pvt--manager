@@ -24,10 +24,12 @@ jobs:
     steps:
     - name: Checkout source code
       uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
 
     - name: Build kernelsu.ko
       run: |
-        git config --global --add safe.directory /__w/KernelSU-Next/KernelSU-Next
+        git config --global --add safe.directory '*'
 
         cd kernel
 
