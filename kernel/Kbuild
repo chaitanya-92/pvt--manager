@@ -123,13 +123,13 @@ endif
 KSU_NEW_DCACHE_FLUSH := $(shell grep -q __flush_dcache_area $(srctree)/arch/arm64/include/asm/cacheflush.h ; echo $$?)
 $(info -- KernelSU-Next new DCACHE flush: $(KSU_NEW_DCACHE_FLUSH))
 
-# Primary manager: LordSU Next (com.lordsunext.manager), RSA-2048.
+# Primary manager: Aarsu Next (com.aarsunext.manager), RSA-2048, cert 717 bytes.
 ifndef KSU_NEXT_MANAGER_SIZE
-KSU_NEXT_MANAGER_SIZE := 0x2cf
+KSU_NEXT_MANAGER_SIZE := 0x2cd
 endif
 
 ifndef KSU_NEXT_MANAGER_HASH
-KSU_NEXT_MANAGER_HASH := 7c92671b92f9b1843cd7e5c96e387f574175694b81ebd66203da4b8c1bb0c19c
+KSU_NEXT_MANAGER_HASH := d84856a879661525cce35c2073e7c216ff5c7426e547ceab829022e583790246
 endif
 
 ifdef KSU_MANAGER_PACKAGE
