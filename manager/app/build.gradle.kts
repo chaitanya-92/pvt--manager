@@ -42,7 +42,7 @@ apksign {
 }
 
 android {
-    namespace = "com.aarsu.manager"
+    namespace = "com.lordsunext.manager"
 
     buildTypes {
         release {
@@ -87,7 +87,7 @@ android {
     applicationVariants.all {
         outputs.forEach {
             val output = it as BaseVariantOutputImpl
-            output.outputFileName = "Aarsu_${managerVersionName}_${managerVersionCode}-$name.apk"
+            output.outputFileName = "LordSU_Next_${managerVersionName}_${managerVersionCode}-$name.apk"
         }
         kotlin.sourceSets {
             getByName(name) {
