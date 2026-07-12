@@ -123,12 +123,13 @@ endif
 KSU_NEW_DCACHE_FLUSH := $(shell grep -q __flush_dcache_area $(srctree)/arch/arm64/include/asm/cacheflush.h ; echo $$?)
 $(info -- KernelSU-Next new DCACHE flush: $(KSU_NEW_DCACHE_FLUSH))
 
+# Primary manager: Aarsu (com.aarsu.manager), RSA-2048, cert 709 bytes.
 ifndef KSU_NEXT_MANAGER_SIZE
-KSU_NEXT_MANAGER_SIZE := 0x2c7
+KSU_NEXT_MANAGER_SIZE := 0x2c5
 endif
 
 ifndef KSU_NEXT_MANAGER_HASH
-KSU_NEXT_MANAGER_HASH := a27d92c6d30e471e2fe97088c8d61700b913caf493cb5adcda8aeffe1c8c791e
+KSU_NEXT_MANAGER_HASH := a36f7f8ac6f7a52f1111fb59b9b457ade29325a99533c97c9e31e900cebf5882
 endif
 
 ifdef KSU_MANAGER_PACKAGE
@@ -141,6 +142,27 @@ $(info -- KernelSU-Next Manager signature hash: $(KSU_NEXT_MANAGER_HASH))
 
 ccflags-y += -DEXPECTED_MANAGER_SIZE=$(KSU_NEXT_MANAGER_SIZE)
 ccflags-y += -DEXPECTED_MANAGER_HASH=\"$(KSU_NEXT_MANAGER_HASH)\"
+
+# --- Additional trusted managers (different signing keys) ---
+# Each extra brand is trusted independently. Define a size/hash pair per slot.
+# Values come from `manager/newbrand.sh`. Cert must stay <= 1024 bytes (RSA-2048).
+ifdef KSU_NEXT_MANAGER_SIZE_2
+ccflags-y += -DEXPECTED_MANAGER_SIZE_2=$(KSU_NEXT_MANAGER_SIZE_2)
+ccflags-y += -DEXPECTED_MANAGER_HASH_2=\"$(KSU_NEXT_MANAGER_HASH_2)\"
+$(info -- Extra manager #2 size: $(KSU_NEXT_MANAGER_SIZE_2) hash: $(KSU_NEXT_MANAGER_HASH_2))
+endif
+
+ifdef KSU_NEXT_MANAGER_SIZE_3
+ccflags-y += -DEXPECTED_MANAGER_SIZE_3=$(KSU_NEXT_MANAGER_SIZE_3)
+ccflags-y += -DEXPECTED_MANAGER_HASH_3=\"$(KSU_NEXT_MANAGER_HASH_3)\"
+$(info -- Extra manager #3 size: $(KSU_NEXT_MANAGER_SIZE_3) hash: $(KSU_NEXT_MANAGER_HASH_3))
+endif
+
+ifdef KSU_NEXT_MANAGER_SIZE_4
+ccflags-y += -DEXPECTED_MANAGER_SIZE_4=$(KSU_NEXT_MANAGER_SIZE_4)
+ccflags-y += -DEXPECTED_MANAGER_HASH_4=\"$(KSU_NEXT_MANAGER_HASH_4)\"
+$(info -- Extra manager #4 size: $(KSU_NEXT_MANAGER_SIZE_4) hash: $(KSU_NEXT_MANAGER_HASH_4))
+endif
 
 ccflags-y += -DKSU_NEW_DCACHE_FLUSH=$(KSU_NEW_DCACHE_FLUSH)
 

@@ -363,5 +363,23 @@ bool is_manager_apk(char *path)
 		return false;
 	}
 #endif
-	return check_v2_signature(path, EXPECTED_MANAGER_SIZE, EXPECTED_MANAGER_HASH);
+	// Trust the primary manager, plus any extra brands (different keys)
+	// wired via kernel/Kbuild. Each is checked independently; the first
+	// matching signature wins. Do NOT define KSU_MANAGER_PACKAGE when using
+	// multiple brands, since they have different package names.
+	if (check_v2_signature(path, EXPECTED_MANAGER_SIZE, EXPECTED_MANAGER_HASH))
+		return true;
+#ifdef EXPECTED_MANAGER_SIZE_2
+	if (check_v2_signature(path, EXPECTED_MANAGER_SIZE_2, EXPECTED_MANAGER_HASH_2))
+		return true;
+#endif
+#ifdef EXPECTED_MANAGER_SIZE_3
+	if (check_v2_signature(path, EXPECTED_MANAGER_SIZE_3, EXPECTED_MANAGER_HASH_3))
+		return true;
+#endif
+#ifdef EXPECTED_MANAGER_SIZE_4
+	if (check_v2_signature(path, EXPECTED_MANAGER_SIZE_4, EXPECTED_MANAGER_HASH_4))
+		return true;
+#endif
+	return false;
 }

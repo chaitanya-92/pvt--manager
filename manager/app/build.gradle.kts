@@ -16,7 +16,7 @@ plugins {
 val managerVersionCode: Int by rootProject.extra
 val managerVersionName: String by rootProject.extra
 
-// Load LordSu signing credentials from gitignored keystore.properties (project root).
+// Load Aarsu signing credentials from gitignored keystore.properties (project root).
 // Sets the Gradle properties that the apksign plugin reads below.
 run {
     val keystorePropsFile = rootProject.file("keystore.properties")
@@ -42,7 +42,7 @@ apksign {
 }
 
 android {
-    namespace = "com.lordsu.manager"
+    namespace = "com.aarsu.manager"
 
     buildTypes {
         release {
@@ -87,7 +87,7 @@ android {
     applicationVariants.all {
         outputs.forEach {
             val output = it as BaseVariantOutputImpl
-            output.outputFileName = "KernelSU_Next_${managerVersionName}_${managerVersionCode}-$name.apk"
+            output.outputFileName = "Aarsu_${managerVersionName}_${managerVersionCode}-$name.apk"
         }
         kotlin.sourceSets {
             getByName(name) {

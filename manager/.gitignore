@@ -9,3 +9,5 @@ captures
 local.properties
 key.jks
 keystore.properties
+keys/
+*.der
