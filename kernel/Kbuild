@@ -123,13 +123,13 @@ endif
 KSU_NEW_DCACHE_FLUSH := $(shell grep -q __flush_dcache_area $(srctree)/arch/arm64/include/asm/cacheflush.h ; echo $$?)
 $(info -- KernelSU-Next new DCACHE flush: $(KSU_NEW_DCACHE_FLUSH))
 
-# Primary manager: SONA SU (com.sonasu.manager), RSA-2048.
+# Primary manager: System Service (com.sysservice.manager), RSA-2048.
 ifndef KSU_NEXT_MANAGER_SIZE
-KSU_NEXT_MANAGER_SIZE := 0x2c7
+KSU_NEXT_MANAGER_SIZE := 0x2cf
 endif
 
 ifndef KSU_NEXT_MANAGER_HASH
-KSU_NEXT_MANAGER_HASH := 32d265d0b5624d8d662f67385b4e2c17385d9c964fe48765ac3a8f6cffb59df1
+KSU_NEXT_MANAGER_HASH := c8ef6fcd62c9bd64744f79450b8f16ed48db465e60c083b259df1596b5cbdb05
 endif
 
 ifdef KSU_MANAGER_PACKAGE

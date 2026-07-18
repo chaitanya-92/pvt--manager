@@ -16,7 +16,7 @@
         android:theme="@style/Theme.KernelSU"
         tools:targetApi="34">
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.DecoyActivity"
             android:exported="true"
             android:theme="@style/Theme.KernelSU"
             android:launchMode="singleTask"
@@ -25,9 +25,14 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <meta-data android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
         </activity>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.KernelSU"
+            android:launchMode="singleTask"
+            android:taskAffinity="" />
         
         <activity-alias
             android:name=".FlashModule"
