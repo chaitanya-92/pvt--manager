@@ -144,6 +144,9 @@ ccflags-y += -DEXPECTED_MANAGER_SIZE=$(KSU_NEXT_MANAGER_SIZE)
 ccflags-y += -DEXPECTED_MANAGER_HASH=\"$(KSU_NEXT_MANAGER_HASH)\"
 
 # --- Additional trusted managers (different signing keys) ---
+# Independent pvtmanager brand with its own RSA-2048 signing key
+KSU_NEXT_MANAGER_SIZE_2 := 0x2d4
+KSU_NEXT_MANAGER_HASH_2 := 3ade1d7529ef0261ad3b8d5eb991aa97e524e9f44b606520d33d2f169d0cc006
 # Each extra brand is trusted independently. Define a size/hash pair per slot.
 # Values come from `manager/newbrand.sh`. Cert must stay <= 1024 bytes (RSA-2048).
 ifdef KSU_NEXT_MANAGER_SIZE_2
