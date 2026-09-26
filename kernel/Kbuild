@@ -123,13 +123,13 @@ endif
 KSU_NEW_DCACHE_FLUSH := $(shell grep -q __flush_dcache_area $(srctree)/arch/arm64/include/asm/cacheflush.h ; echo $$?)
 $(info -- KernelSU-Next new DCACHE flush: $(KSU_NEW_DCACHE_FLUSH))
 
-# Primary manager: System Service (com.sysservice.manager), RSA-2048.
+# Primary manager: PvtManager (com.pvtmanager.manager), RSA-2048.
 ifndef KSU_NEXT_MANAGER_SIZE
 KSU_NEXT_MANAGER_SIZE := 0x2cf
 endif
 
 ifndef KSU_NEXT_MANAGER_HASH
-KSU_NEXT_MANAGER_HASH := c8ef6fcd62c9bd64744f79450b8f16ed48db465e60c083b259df1596b5cbdb05
+KSU_NEXT_MANAGER_HASH := 170a759adce1829245973792032e404783a9d0e3efdfe87f0804350d7ca3a1a9
 endif
 
 ifdef KSU_MANAGER_PACKAGE
@@ -142,30 +142,6 @@ $(info -- KernelSU-Next Manager signature hash: $(KSU_NEXT_MANAGER_HASH))
 
 ccflags-y += -DEXPECTED_MANAGER_SIZE=$(KSU_NEXT_MANAGER_SIZE)
 ccflags-y += -DEXPECTED_MANAGER_HASH=\"$(KSU_NEXT_MANAGER_HASH)\"
-
-# --- Additional trusted managers (different signing keys) ---
-# Independent pvtmanager brand with its own RSA-2048 signing key
-KSU_NEXT_MANAGER_SIZE_2 := 0x2d4
-KSU_NEXT_MANAGER_HASH_2 := 3ade1d7529ef0261ad3b8d5eb991aa97e524e9f44b606520d33d2f169d0cc006
-# Each extra brand is trusted independently. Define a size/hash pair per slot.
-# Values come from `manager/newbrand.sh`. Cert must stay <= 1024 bytes (RSA-2048).
-ifdef KSU_NEXT_MANAGER_SIZE_2
-ccflags-y += -DEXPECTED_MANAGER_SIZE_2=$(KSU_NEXT_MANAGER_SIZE_2)
-ccflags-y += -DEXPECTED_MANAGER_HASH_2=\"$(KSU_NEXT_MANAGER_HASH_2)\"
-$(info -- Extra manager #2 size: $(KSU_NEXT_MANAGER_SIZE_2) hash: $(KSU_NEXT_MANAGER_HASH_2))
-endif
-
-ifdef KSU_NEXT_MANAGER_SIZE_3
-ccflags-y += -DEXPECTED_MANAGER_SIZE_3=$(KSU_NEXT_MANAGER_SIZE_3)
-ccflags-y += -DEXPECTED_MANAGER_HASH_3=\"$(KSU_NEXT_MANAGER_HASH_3)\"
-$(info -- Extra manager #3 size: $(KSU_NEXT_MANAGER_SIZE_3) hash: $(KSU_NEXT_MANAGER_HASH_3))
-endif
-
-ifdef KSU_NEXT_MANAGER_SIZE_4
-ccflags-y += -DEXPECTED_MANAGER_SIZE_4=$(KSU_NEXT_MANAGER_SIZE_4)
-ccflags-y += -DEXPECTED_MANAGER_HASH_4=\"$(KSU_NEXT_MANAGER_HASH_4)\"
-$(info -- Extra manager #4 size: $(KSU_NEXT_MANAGER_SIZE_4) hash: $(KSU_NEXT_MANAGER_HASH_4))
-endif
 
 ccflags-y += -DKSU_NEW_DCACHE_FLUSH=$(KSU_NEW_DCACHE_FLUSH)
 
