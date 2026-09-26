@@ -100,10 +100,10 @@ jobs:
 
       - name: Write key
         env:
-          KEYSTORE: ${{ secrets.KEYSTORE }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE: ${{ secrets.PVTMANAGER_KEYSTORE }}
+          KEYSTORE_PASSWORD: ${{ secrets.PVTMANAGER_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.PVTMANAGER_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.PVTMANAGER_KEY_PASSWORD }}
         run: |
           if [ -n "$KEYSTORE" ]; then
             {
