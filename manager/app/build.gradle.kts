@@ -44,6 +44,10 @@ apksign {
 android {
     namespace = "com.sysservice.manager"
 
+    defaultConfig {
+        applicationId = "com.pvtmanager.manager"
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = true
