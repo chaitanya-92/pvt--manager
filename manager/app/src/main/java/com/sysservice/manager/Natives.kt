@@ -172,8 +172,12 @@ object Natives {
     val managerUAPIVersion: Int
         external get
 
-    fun isFullFeatured(): Boolean {
-        return isManager && kernelUAPIVersion == managerUAPIVersion && com.sysservice.manager.ui.util.rootAvailable()
+    fun checkUAPIMismatch(): Boolean {
+        return kernelUAPIVersion != managerUAPIVersion
+    }
+
+    fun requireNewKernel(): Boolean {
+        return (version != -1 && version < MINIMAL_SUPPORTED_KERNEL) || checkUAPIMismatch()
     }
 
     val KSU_WORK_DIR = "/data/adb/ksu/"
