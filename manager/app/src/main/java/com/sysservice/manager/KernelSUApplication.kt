@@ -31,7 +31,6 @@ class KernelSUApplication : Application(), ViewModelStoreOwner {
 
     override fun onCreate() {
         super.onCreate()
-        LocaleHelper.migrateLegacyLocale(this)
         ksuApp = this
         Shell.setDefaultBuilder(createRootShellBuilder(true))
         Shell.enableVerboseLogging = BuildConfig.DEBUG
