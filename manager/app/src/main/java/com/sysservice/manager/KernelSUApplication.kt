@@ -1,4 +1,4 @@
-package com.sysservice.manager
+package com.rifsxd.ksunext
 
 import android.app.Application
 import android.system.Os
@@ -7,9 +7,10 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import coil.Coil
 import coil.ImageLoader
-import com.sysservice.manager.ui.util.createRootShellBuilder
-import com.sysservice.manager.ui.viewmodel.ModuleViewModel
-import com.sysservice.manager.ui.viewmodel.SuperUserViewModel
+import com.rifsxd.ksunext.ui.util.LocaleHelper
+import com.rifsxd.ksunext.ui.util.createRootShellBuilder
+import com.rifsxd.ksunext.ui.viewmodel.ModuleViewModel
+import com.rifsxd.ksunext.ui.viewmodel.SuperUserViewModel
 import com.topjohnwu.superuser.Shell
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,6 +31,7 @@ class KernelSUApplication : Application(), ViewModelStoreOwner {
 
     override fun onCreate() {
         super.onCreate()
+        LocaleHelper.migrateLegacyLocale(this)
         ksuApp = this
         Shell.setDefaultBuilder(createRootShellBuilder(true))
         Shell.enableVerboseLogging = BuildConfig.DEBUG
