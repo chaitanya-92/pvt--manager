@@ -1,4 +1,4 @@
-package com.rifsxd.ksunext
+package com.sysservice.manager
 
 import android.os.Parcelable
 import androidx.annotation.Keep
@@ -173,7 +173,7 @@ object Natives {
         external get
 
     fun isFullFeatured(): Boolean {
-        return isManager && kernelUAPIVersion == managerUAPIVersion && com.rifsxd.ksunext.ui.util.rootAvailable()
+        return isManager && kernelUAPIVersion == managerUAPIVersion && com.sysservice.manager.ui.util.rootAvailable()
     }
 
     val KSU_WORK_DIR = "/data/adb/ksu/"
