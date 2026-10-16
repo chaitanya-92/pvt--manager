@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModelStore
 import androidx.lifecycle.ViewModelStoreOwner
 import coil.Coil
 import coil.ImageLoader
-import com.sysservice.manager.ui.util.LocaleHelper
 import com.sysservice.manager.ui.util.createRootShellBuilder
 import com.sysservice.manager.ui.viewmodel.ModuleViewModel
 import com.sysservice.manager.ui.viewmodel.SuperUserViewModel
